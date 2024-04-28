@@ -20,4 +20,4 @@ obj/
 
 # Arquivos de banco de dados
 db/*
-
+.fake
