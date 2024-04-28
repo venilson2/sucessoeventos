@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: docker/Dockerfile.dev
     container_name: sucessoeventos-mvc
-    command: bash -c "dotnet clean && dotnet restore && dotnet run"
+    command: bash -c "dotnet clean && dotnet build && dotnet run"
     volumes:
       - ./:/app
     ports:
