@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  mvc:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.dev
+    container_name: sucessoeventos-mvc
+    command: bash -c "dotnet clean && dotnet restore && dotnet run"
+    volumes:
+      - ./:/app
+    ports:
+      - "5149:5149"

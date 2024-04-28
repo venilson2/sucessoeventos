@@ -8,6 +8,7 @@
 *.dll.config
 *.exe.config
 *.xml
+.mono/
 
 # Arquivos de compilação gerados pelo MSBuild
 bin/
@@ -16,3 +17,7 @@ obj/
 # Arquivos de log e de depuração
 *.log
 *.swp
+
+# Arquivos de banco de dados
+db/*
+
