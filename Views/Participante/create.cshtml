@@ -24,7 +24,7 @@
     
     <div class="form-group">
         @Html.LabelFor(model => model.DataNascimento)
-        @Html.TextBoxFor(model => model.DataNascimento, new { @class = "form-control" })
+        @Html.TextBoxFor(model => model.DataNascimento, new { @class = "form-control date-mask" })
         @Html.ValidationMessageFor(model => model.DataNascimento, "", new { @class = "text-danger" })
     </div>
     
@@ -44,6 +44,10 @@
     <script>
         $(document).ready(function () {
             $('.phone-mask').mask('(99) 99999-9999');
+        });
+
+        $(document).ready(function () {
+            $('.date-mask').mask('99/99/9999').val("dd/mm/yyyy");;
         });
     </script>
 }
