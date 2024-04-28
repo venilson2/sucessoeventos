@@ -1,0 +1,18 @@
+# Arquivos temporários gerados pelo Visual Studio
+.vs/
+
+# Arquivos de compilação
+*.dll
+*.exe
+*.pdb
+*.dll.config
+*.exe.config
+*.xml
+
+# Arquivos de compilação gerados pelo MSBuild
+bin/
+obj/
+
+# Arquivos de log e de depuração
+*.log
+*.swp
