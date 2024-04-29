@@ -1,10 +1,16 @@
 using Microsoft.EntityFrameworkCore;
+using SucessoEventos.Interfaces;
+using SucessoEventos.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEntityFrameworkSqlServer()
     .AddDbContext<AppDbContext>(options => 
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<IParticipanteService, ParticipanteService>();
+builder.Services.AddScoped<IPacoteService, PacoteService>();
+builder.Services.AddScoped<IAtividadeService, AtividadeService>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

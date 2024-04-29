@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using SucessoEventos.Interfaces;
 using SucessoEventos.Models;
 using SucessoEventos.ViewModels;
 
@@ -7,21 +8,41 @@ namespace SucessoEventos.Controllers;
 
 public class ParticipanteController : Controller
 {
-    private readonly ILogger<ParticipanteController> _logger;
+    private readonly IParticipanteService _participanteService;
+    private readonly IPacoteService _pacoteService;
+    private readonly IAtividadeService _atividadeService;
 
-    public ParticipanteController(ILogger<ParticipanteController> logger)
+    public ParticipanteController(
+        IParticipanteService participanteService,
+        IAtividadeService atividadeService,
+        IPacoteService pacoteService
+    )
     {
-        _logger = logger;
+        _participanteService = participanteService;
+        _atividadeService = atividadeService;
+        _pacoteService = pacoteService;
     }
 
-    public IActionResult Create()
+    public async Task<IActionResult> Create()
     {
-        var viewModel = new DadosCadastroViewModel
-        {
-            Atividades =  new List<AtividadeViewModel>(),
-            Pacotes = new List<PacoteViewModel>()
-        };
-        return View(viewModel);
+        IEnumerable<PacoteModel> pacotes = await _pacoteService.GetAll();
+        IEnumerable<AtividadeModel> atividades = await _atividadeService.GetAll();
+
+        List<AtividadeViewModel> atividadesViewModel = atividades.Select(a => new AtividadeViewModel {
+            CodAtv = a.CodAtv,
+            DescAtv = a.DescAtv,
+            Vagas = a.Vagas,        
+            Preco = a.Preco,
+            Selected = false
+        }).ToList();
+
+        List<PacoteViewModel> pacotesViewModel = pacotes.Select(c => new PacoteViewModel {
+            CodPac = c.CodPac,
+            Descricao = c.Descricao,
+            Preco = c.Preco
+        }).ToList();
+
+        return View();
     }
 
     [HttpPost]

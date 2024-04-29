@@ -5,6 +5,10 @@ public class AppDbContext : DbContext
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
+    public DbSet<ParticipanteModel> Participantes { get; set; }
+    public DbSet<PacoteModel> Pacotes { get; set; }
+    public DbSet<AtividadeModel> Atividades { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder){
         modelBuilder.Entity<ParticipanteModel>()
             .ToTable("Participantes")

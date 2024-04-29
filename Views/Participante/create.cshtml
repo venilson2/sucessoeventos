@@ -35,11 +35,6 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.GenerosSelecionados)
-        @Html.ListBoxFor(model => model.GenerosSelecionados, Model.OpcoesGenero, new { @class = "form-control", multiple = "multiple" })
-    </div>
-
-    <div class="form-group">
         @Html.CheckBoxFor(m => m.ElectricFan, new { @class = "" })
         @Html.LabelFor(m => m.ElectricFan, new { @class = "" })
         @Html.DisplayTextFor(m => m.ElectricFanRate)
