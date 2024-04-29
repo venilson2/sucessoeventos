@@ -24,9 +24,11 @@ services:
       context: .
       dockerfile: docker/Dockerfile.dev
     container_name: sucessoeventos-mvc
-    command: bash -c "dockerize -wait tcp://db:1433 -timeout 60m && dotnet clean && dotnet build && export PATH=\"$PATH:/root/.dotnet/tools\" && dotnet tool install --global dotnet-ef --version=7.0.0 && dotnet ef database update && dotnet watch run"
     volumes:
       - ./:/app
+      - /app/obj
+    working_dir: /app
+    command: bash -c "dockerize -wait tcp://db:1433 -timeout 60m && dotnet clean && dotnet build && export PATH=\"$PATH:/root/.dotnet/tools\" && dotnet tool install --global dotnet-ef --version=7.0.0 && dotnet ef database update && dotnet watch run --urls "http://0.0.0.0:5149" --no-restore"
     ports:
       - "5149:5149"
     networks:

@@ -19,5 +19,4 @@ obj/
 *.swp
 
 # Arquivos de banco de dados
-db/*
-.fake
+db/

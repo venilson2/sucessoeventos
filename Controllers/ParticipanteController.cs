@@ -25,37 +25,27 @@ public class ParticipanteController : Controller
 
     public async Task<IActionResult> Create()
     {
-        // IEnumerable<PacoteModel> pacotes = await _pacoteService.GetAll();
-        // IEnumerable<AtividadeModel> atividades = await _atividadeService.GetAll();
+        IEnumerable<PacoteModel> pacotes = await _pacoteService.GetAll();
+        IEnumerable<AtividadeModel> atividades = await _atividadeService.GetAll();
 
-        // List<AtividadeViewModel> atividadesViewModel = atividades.Select(a => new AtividadeViewModel {
-        //     CodAtv = a.CodAtv,
-        //     DescAtv = a.DescAtv,
-        //     Vagas = a.Vagas,        
-        //     Preco = a.Preco,
-        //     Selected = false
-        // }).ToList();
+        List<AtividadeViewModel> atividadesViewModel = atividades.Select(a => new AtividadeViewModel {
+            CodAtv = a.CodAtv,
+            DescAtv = a.DescAtv,
+            Vagas = a.Vagas,        
+            Preco = a.Preco,
+            Selected = false
+        }).ToList();
 
-        // List<PacoteViewModel> pacotesViewModel = pacotes.Select(c => new PacoteViewModel {
-        //     CodPac = c.CodPac,
-        //     Descricao = c.Descricao,
-        //     Preco = c.Preco
-        // }).ToList();
+        List<PacoteViewModel> pacotesViewModel = pacotes.Select(c => new PacoteViewModel {
+            CodPac = c.CodPac,
+            Descricao = c.Descricao,
+            Preco = c.Preco
+        }).ToList();
 
         var model = new ParticipanteViewModel
             {
-                Pacotes  = new List<PacoteViewModel>
-                {
-                    new PacoteViewModel { CodPac = 10, Descricao = "Descrição 1", Preco = 10.0m },
-                    new PacoteViewModel { CodPac = 99, Descricao = "Descrição 2", Preco = 20.0m }
-                },
-                Atividades = new List<AtividadeViewModel>
-                {
-                    new AtividadeViewModel {CodAtv = 5, DescAtv = "Decrição 5", Preco = 10.0m, Vagas = 10},
-                    new AtividadeViewModel {CodAtv = 7, DescAtv = "Decrição 7", Preco = 20.0m, Vagas = 20},
-                    new AtividadeViewModel {CodAtv = 50, DescAtv = "Decrição 50", Preco = 99.0m, Vagas = 11},
-                    new AtividadeViewModel {CodAtv = 58, DescAtv = "Decrição 58", Preco = 50.0m, Vagas = 6},
-                }
+                Pacotes  = pacotesViewModel,
+                Atividades = atividadesViewModel
             };
 
         return View(model);
