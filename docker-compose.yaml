@@ -22,7 +22,7 @@ services:
   mvc:
     build:
       context: .
-      dockerfile: docker/Dockerfile.dev
+      dockerfile: Docker/Dockerfile.dev
     container_name: sucessoeventos-mvc
     volumes:
       - ./:/app
