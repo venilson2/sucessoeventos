@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace SucessoEventos.ViewModels;
 public class ParticipanteViewModel
@@ -17,10 +16,10 @@ public class ParticipanteViewModel
     public string Telefone { get; set; }
 
     [Display(Name = "Pacotes")]
-    public IEnumerable<int> CodPac  { get; set; }
-    public List<PacoteViewModel> Pacotes  { get; set; }
+    public IEnumerable<int>? CodPac  { get; set; }
+    public List<PacoteViewModel>? Pacotes  { get; set; }
 
     [Display(Name = "Atividades")]
-    public IEnumerable<int> CodAtv { get; set; }
-    public List<AtividadeViewModel> Atividades { get; set; }
+    public IEnumerable<int>? CodAtv { get; set; }
+    public List<AtividadeViewModel>? Atividades { get; set; }
 }

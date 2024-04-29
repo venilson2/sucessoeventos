@@ -43,10 +43,10 @@ public class ParticipanteController : Controller
         }).ToList();
 
         var model = new ParticipanteViewModel
-            {
-                Pacotes  = pacotesViewModel,
-                Atividades = atividadesViewModel
-            };
+        {
+            Pacotes  = pacotesViewModel,
+            Atividades = atividadesViewModel
+        };
 
         return View(model);
     }
@@ -69,7 +69,6 @@ public class ParticipanteController : Controller
             };
             return View(model);
         }
-
         return View();
     }
 
