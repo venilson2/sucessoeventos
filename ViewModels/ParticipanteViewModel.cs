@@ -17,26 +17,7 @@ public class ParticipanteViewModel
     public string Telefone { get; set; }
 
     [Display(Name = "Pacotes")]
-    public int ListaPacotes { get; set; }
-    public ICollection<PacoteViewModel> Pacotes { get; set; }
+    public IEnumerable<int> IdsPacotesSelecionados  { get; set; }
 
-    // public List<string> GenerosSelecionados { get; set; }
-
-    // public List<SelectListItem> OpcoesGenero { get; set; } = new List<SelectListItem>
-    // {
-    //     new SelectListItem { Text = "Masculino", Value = "M" },
-    //     new SelectListItem { Text = "Feminino", Value = "F" },
-    //     new SelectListItem { Text = "Outro", Value = "O" }
-    // };
-
-    // [Display(Name = "Electric Fan")]
-    // public bool ElectricFan { get; set; }
-
-    // private string electricFanRate;
-
-    // public string ElectricFanRate
-    // {
-    //     get { return electricFanRate ?? (electricFanRate = "$15/month"); }
-    //     set { electricFanRate = value; }
-    // }
+    public List<PacoteViewModel> PacotesDisponiveis  { get; set; }
 }

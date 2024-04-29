@@ -25,32 +25,47 @@ public class ParticipanteController : Controller
 
     public async Task<IActionResult> Create()
     {
-        IEnumerable<PacoteModel> pacotes = await _pacoteService.GetAll();
-        IEnumerable<AtividadeModel> atividades = await _atividadeService.GetAll();
+        // IEnumerable<PacoteModel> pacotes = await _pacoteService.GetAll();
+        // IEnumerable<AtividadeModel> atividades = await _atividadeService.GetAll();
 
-        List<AtividadeViewModel> atividadesViewModel = atividades.Select(a => new AtividadeViewModel {
-            CodAtv = a.CodAtv,
-            DescAtv = a.DescAtv,
-            Vagas = a.Vagas,        
-            Preco = a.Preco,
-            Selected = false
-        }).ToList();
+        // List<AtividadeViewModel> atividadesViewModel = atividades.Select(a => new AtividadeViewModel {
+        //     CodAtv = a.CodAtv,
+        //     DescAtv = a.DescAtv,
+        //     Vagas = a.Vagas,        
+        //     Preco = a.Preco,
+        //     Selected = false
+        // }).ToList();
 
-        List<PacoteViewModel> pacotesViewModel = pacotes.Select(c => new PacoteViewModel {
-            CodPac = c.CodPac,
-            Descricao = c.Descricao,
-            Preco = c.Preco
-        }).ToList();
+        // List<PacoteViewModel> pacotesViewModel = pacotes.Select(c => new PacoteViewModel {
+        //     CodPac = c.CodPac,
+        //     Descricao = c.Descricao,
+        //     Preco = c.Preco
+        // }).ToList();
 
-        return View();
+        var model = new ParticipanteViewModel
+            {
+                PacotesDisponiveis  = new List<PacoteViewModel>
+                {
+                    new PacoteViewModel { CodPac = 10, Descricao = "Descrição 1", Preco = 10.0m },
+                    new PacoteViewModel { CodPac = 99, Descricao = "Descrição 2", Preco = 20.0m }
+                }
+            };
+
+        return View(model);
     }
 
     [HttpPost]
     public async Task<IActionResult> Create(ParticipanteViewModel model)
     {
         if (!ModelState.IsValid){ 
+            model.PacotesDisponiveis = new List<PacoteViewModel>
+            {
+                new PacoteViewModel { CodPac = 10, Descricao = "Descrição 1", Preco = 10.0m },
+                new PacoteViewModel { CodPac = 99, Descricao = "Descrição 2", Preco = 20.0m }
+            };
             return View(model);
         }
+
         return View();
     }
 

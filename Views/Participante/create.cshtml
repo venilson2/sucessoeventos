@@ -34,6 +34,11 @@
         @Html.ValidationMessageFor(model => model.Telefone, "", new { @class = "text-danger" })
     </div>
 
+    <div class="form-group">
+        @Html.LabelFor(model => model.IdsPacotesSelecionados, "Pacotes:")
+        @Html.ListBoxFor(model => model.IdsPacotesSelecionados, new MultiSelectList(Model.PacotesDisponiveis, "CodPac", "DescricaoComPreco"), new { @class = "form-control" })
+    </div>
+
     <div class="form-group mt-4">
         <button type="submit" class="btn btn-primary">Cadastrar</button>
     </div>
