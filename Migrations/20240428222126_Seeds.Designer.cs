@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace SucessoEventos.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240428222126_Seeds")]
+    partial class Seeds
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -78,14 +81,14 @@ namespace SucessoEventos.Migrations
                         {
                             CodAtv = 1,
                             DescAtv = "Atividade 1",
-                            Preco = 10.0m,
+                            Preco = 0m,
                             Vagas = 10
                         },
                         new
                         {
                             CodAtv = 2,
                             DescAtv = "Atividade 2",
-                            Preco = 20.0m,
+                            Preco = 0m,
                             Vagas = 20
                         });
                 });
