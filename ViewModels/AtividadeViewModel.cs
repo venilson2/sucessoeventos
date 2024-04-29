@@ -5,4 +5,5 @@ public class AtividadeViewModel {
     public int Vagas { get; set; }
     public decimal Preco { get; set; }
     public bool Selected { get; set; }
+    public string DescricaoDetalhada => $"{DescAtv} - R${Preco}";
 }

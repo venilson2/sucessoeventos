@@ -44,10 +44,17 @@ public class ParticipanteController : Controller
 
         var model = new ParticipanteViewModel
             {
-                PacotesDisponiveis  = new List<PacoteViewModel>
+                Pacotes  = new List<PacoteViewModel>
                 {
                     new PacoteViewModel { CodPac = 10, Descricao = "Descrição 1", Preco = 10.0m },
                     new PacoteViewModel { CodPac = 99, Descricao = "Descrição 2", Preco = 20.0m }
+                },
+                Atividades = new List<AtividadeViewModel>
+                {
+                    new AtividadeViewModel {CodAtv = 5, DescAtv = "Decrição 5", Preco = 10.0m, Vagas = 10},
+                    new AtividadeViewModel {CodAtv = 7, DescAtv = "Decrição 7", Preco = 20.0m, Vagas = 20},
+                    new AtividadeViewModel {CodAtv = 50, DescAtv = "Decrição 50", Preco = 99.0m, Vagas = 11},
+                    new AtividadeViewModel {CodAtv = 58, DescAtv = "Decrição 58", Preco = 50.0m, Vagas = 6},
                 }
             };
 
@@ -58,10 +65,17 @@ public class ParticipanteController : Controller
     public async Task<IActionResult> Create(ParticipanteViewModel model)
     {
         if (!ModelState.IsValid){ 
-            model.PacotesDisponiveis = new List<PacoteViewModel>
+            model.Pacotes = new List<PacoteViewModel>
             {
                 new PacoteViewModel { CodPac = 10, Descricao = "Descrição 1", Preco = 10.0m },
                 new PacoteViewModel { CodPac = 99, Descricao = "Descrição 2", Preco = 20.0m }
+            };
+            model.Atividades = new List<AtividadeViewModel>
+            {
+                new AtividadeViewModel {CodAtv = 5, DescAtv = "Decrição 5", Preco = 10.0m, Vagas = 10},
+                new AtividadeViewModel {CodAtv = 7, DescAtv = "Decrição 7", Preco = 20.0m, Vagas = 20},
+                new AtividadeViewModel {CodAtv = 50, DescAtv = "Decrição 50", Preco = 99.0m, Vagas = 11},
+                new AtividadeViewModel {CodAtv = 58, DescAtv = "Decrição 58", Preco = 50.0m, Vagas = 6},
             };
             return View(model);
         }
