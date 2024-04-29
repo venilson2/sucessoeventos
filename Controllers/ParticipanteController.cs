@@ -16,7 +16,12 @@ public class ParticipanteController : Controller
 
     public IActionResult Create()
     {
-        return View();
+        var viewModel = new DadosCadastroViewModel
+        {
+            Atividades =  new List<AtividadeViewModel>(),
+            Pacotes = new List<PacoteViewModel>()
+        };
+        return View(viewModel);
     }
 
     [HttpPost]

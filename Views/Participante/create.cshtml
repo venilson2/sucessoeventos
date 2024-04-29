@@ -34,6 +34,23 @@
         @Html.ValidationMessageFor(model => model.Telefone, "", new { @class = "text-danger" })
     </div>
 
+    <div class="form-group">
+        @Html.LabelFor(model => model.GenerosSelecionados)
+        @Html.ListBoxFor(model => model.GenerosSelecionados, Model.OpcoesGenero, new { @class = "form-control", multiple = "multiple" })
+    </div>
+
+    <div class="form-group">
+        @Html.CheckBoxFor(m => m.ElectricFan, new { @class = "" })
+        @Html.LabelFor(m => m.ElectricFan, new { @class = "" })
+        @Html.DisplayTextFor(m => m.ElectricFanRate)
+    </div>
+
+    <div class="form-group">
+        @Html.CheckBoxFor(m => m.ElectricFan, new { @class = "" })
+        @Html.LabelFor(m => m.ElectricFan, new { @class = "" })
+        @Html.DisplayTextFor(m => m.ElectricFanRate)
+    </div>
+
     <div class="form-group mt-4">
         <button type="submit" class="btn btn-primary">Cadastrar</button>
     </div>
@@ -47,7 +64,7 @@
         });
 
         $(document).ready(function () {
-            $('.date-mask').mask('99/99/9999').val("dd/mm/yyyy");;
+            $('.date-mask').mask('99/99/9999');
         });
     </script>
 }
