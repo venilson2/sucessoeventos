@@ -1,16 +1,22 @@
 # Sucesso Eventos
 
-### Rodadndo com Docker 
+## Rodadndo com Docker 
 
 Para iniciar o projeto com Docker, execute o seguinte comando na raiz do projeto:
+
+Antes de executar o projeto, certifique-se de configurar a conexão com o banco de dados no arquivo `appsettings.json`, conforme abaixo:
+
+```json
+"DefaultConnection": "server=sql_db;database=sucessoeventos;user=sa;password=Root@2024;TrustServerCertificate=True"
+```
 
 ```
 docker compose up --build
 ```
 
-### Rodadndo 
+## Rodadndo 
 
-## Configuração do Banco de Dados
+### Configuração do Banco de Dados
 
 Antes de executar o projeto, certifique-se de configurar a conexão com o banco de dados no arquivo `appsettings.json`, conforme abaixo:
 
