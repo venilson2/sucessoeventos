@@ -50,8 +50,9 @@
             </div>
         </div>
     </div>
-
-    <form asp-action="Create" asp-controller="Participante" method="post">
+    
+    @using (Html.BeginForm("Create", "Participante", FormMethod.Post))
+    {
         <input type="hidden" asp-for="Nome" />
         <input type="hidden" asp-for="DataNascimento" />
         <input type="hidden" asp-for="Telefone" />
@@ -64,5 +65,5 @@
                 <button type="submit" class="btn btn-primary">Confirmar e Salvar</button>
             </div>
         </div>
-    </form>
+    }
 </div>

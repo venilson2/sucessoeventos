@@ -16,53 +16,61 @@
 
 <h1>Formulário</h1>
 
-@using (Html.BeginForm("Form", "Participante", FormMethod.Post))
-{
-    <div class="form-group">
-        @Html.LabelFor(model => model.Nome)
-        @Html.TextBoxFor(model => model.Nome, new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
-    </div>
-    
-    <div class="form-group">
-        @Html.LabelFor(model => model.DataNascimento)
-        @Html.TextBoxFor(model => model.DataNascimento, new { @class = "form-control datepicker" })
-        @Html.ValidationMessageFor(model => model.DataNascimento, "", new { @class = "text-danger" })
-    </div>
-    
-    <div class="form-group">
-        @Html.LabelFor(model => model.Telefone)
-        @Html.TextBoxFor(model => model.Telefone, new { @class = "form-control phone-mask" })
-        @Html.ValidationMessageFor(model => model.Telefone, "", new { @class = "text-danger" })
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.CodPac, "Pacotes:")
-        @Html.ListBoxFor(model => model.CodPac, new MultiSelectList(Model.Pacotes, "CodPac", "DescricaoDetalhada"), new { @class = "form-control" })
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.CodAtv, "Atividades:")
-        @if(Model.Atividades != null)
-        {
-            @foreach (var atividade in Model.Atividades)
-            {
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="@("atividade_" + atividade.CodAtv)" name="CodAtv" value="@atividade.CodAtv" @(atividade.Selected ? "checked" : "")>
-                    <label class="form-check-label" for="@("atividade_" + atividade.CodAtv)">
-                        @atividade.DescAtv
-                    </label>
-                </div>
-            }
-        }
-    </div>
-
-    <div class="row mt-3 justify-content-end text-end">
-        <div class="col mb-3">
-            <button type="submit" class="btn btn-primary">Prosseguir</button>
+<div class="container">
+    @using (Html.BeginForm("Form", "Participante", FormMethod.Post))
+    {
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nome)
+            @Html.TextBoxFor(model => model.Nome, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
         </div>
-    </div>
-}
+
+        <br/>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.DataNascimento)
+            @Html.TextBoxFor(model => model.DataNascimento, new { @class = "form-control datepicker" })
+            @Html.ValidationMessageFor(model => model.DataNascimento, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Telefone)
+            @Html.TextBoxFor(model => model.Telefone, new { @class = "form-control phone-mask" })
+            @Html.ValidationMessageFor(model => model.Telefone, "", new { @class = "text-danger" })
+        </div>
+
+        <br/>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CodPac, "Pacotes:")
+            @Html.ListBoxFor(model => model.CodPac, new MultiSelectList(Model.Pacotes, "CodPac", "DescricaoDetalhada"), new { @class = "form-control" })
+        </div>
+
+        <br/>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CodAtv, "Atividades:")
+            @if(Model.Atividades != null)
+            {
+                @foreach (var atividade in Model.Atividades)
+                {
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="@("atividade_" + atividade.CodAtv)" name="CodAtv" value="@atividade.CodAtv" @(atividade.Selected ? "checked" : "")>
+                        <label class="form-check-label" for="@("atividade_" + atividade.CodAtv)">
+                            @atividade.DescAtv
+                        </label>
+                    </div>
+                }
+            }
+        </div>
+
+        <div class="row mt-3 justify-content-end text-end">
+            <div class="col mb-3">
+                <button type="submit" class="btn btn-primary">Prosseguir</button>
+            </div>
+        </div>
+    }
+</div>
 
 @section scripts {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script>
