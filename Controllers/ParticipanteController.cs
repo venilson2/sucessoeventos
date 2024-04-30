@@ -82,8 +82,8 @@ public class ParticipanteController : Controller
 
     public async Task<IActionResult> Review(ParticipanteViewModel model)
     {
-        if(model.CodPac != null){
-            var pacotes = await _pacoteService.GetPacotesByIds(model.CodPac);
+        if(model.CodPacSelecionados != null){
+            var pacotes = await _pacoteService.GetPacotesByIds(model.CodPacSelecionados);
 
             model.Pacotes = pacotes.Select(c => new PacoteViewModel {
                 CodPac = c.CodPac,

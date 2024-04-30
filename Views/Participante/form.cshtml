@@ -42,8 +42,8 @@
         <br/>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CodPac, "Pacotes:")
-            @Html.ListBoxFor(model => model.CodPac, new MultiSelectList(Model.Pacotes, "CodPac", "DescricaoDetalhada"), new { @class = "form-control" })
+            @Html.LabelFor(model => model.CodPacSelecionados, "Pacotes:")
+            @Html.ListBoxFor(model => model.CodPacSelecionados, new MultiSelectList(Model.Pacotes, "CodPac", "DescricaoDetalhada"), new { @class = "form-control" })
         </div>
 
         <br/>

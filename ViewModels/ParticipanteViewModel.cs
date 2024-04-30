@@ -16,7 +16,7 @@ public class ParticipanteViewModel
     public string Telefone { get; set; }
 
     [Display(Name = "Pacotes")]
-    public IEnumerable<int>? CodPac  { get; set; }
+    public IEnumerable<int>? CodPacSelecionados  { get; set; }
     public List<PacoteViewModel>? Pacotes  { get; set; }
 
     [Display(Name = "Atividades")]
