@@ -1,0 +1,58 @@
+@model ParticipanteViewModel
+
+<h1>Revisão dos Dados</h1>
+
+<div>
+    <p><strong>Nome:</strong> @Model.Nome</p>
+    <p><strong>Data de Nascimento:</strong> @Model.DataNascimento</p>
+    <p><strong>Telefone:</strong> @Model.Telefone</p>
+    
+    <h2>Pacotes Selecionados:</h2>
+    @if (Model.Pacotes != null)
+    {
+        <ul>
+            @foreach (var pacote in Model.Pacotes)
+            {
+                <li>@pacote.Descricao - R$ @pacote.Preco</li>
+            }
+        </ul>
+    }
+    else
+    {
+        <select class="form-control" disabled>
+            <option>Nenhum pacotes Selecionados</option>
+        </select>
+    }
+
+
+    <h2>Atividades Selecionadas:</h2>
+    @if (Model.Atividades != null)
+    {
+        <ul>
+            @foreach (var atividade in Model.Atividades)
+            {
+                <li>@atividade.DescAtv - Vagas: @atividade.Vagas - R$ @atividade.Preco</li>
+            }
+        </ul>
+    }
+    else
+    {
+        <select class="form-control" disabled>
+            <option>Nenhuma Atividades Selecionadas</option>
+        </select>
+    }
+
+</div>
+
+<form asp-action="Create" asp-controller="Participante" method="post">
+    <input type="hidden" asp-for="Nome" />
+    <input type="hidden" asp-for="DataNascimento" />
+    <input type="hidden" asp-for="Telefone" />
+    <input type="hidden" asp-for="CodPac" />
+    <input type="hidden" asp-for="CodAtv" />
+
+    <div class="form-group mt-4">
+        <button type="submit" class="btn btn-primary">Confirmar e Salvar</button>
+        <button type="button" onclick="history.back()" class="btn btn-secondary">Voltar</button>
+    </div>
+</form>

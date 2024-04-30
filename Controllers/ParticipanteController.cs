@@ -69,7 +69,12 @@ public class ParticipanteController : Controller
             };
             return View(model);
         }
-        return View();
+        return RedirectToAction("Review", model);
+    }
+
+    public IActionResult Review(ParticipanteViewModel model)
+    {
+        return View(model);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
