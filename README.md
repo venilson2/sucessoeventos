@@ -16,8 +16,7 @@ Antes de executar o projeto, certifique-se de configurar a conexão com o banco 
 
 ```json
 "DefaultConnection": "server=SEU_SERVIDOR;database=SUA_DATABASE;user=SEU_USUARIO;password=SUA_SENHA;TrustServerCertificate=True"
-
-Substitua SEU_SERVIDOR, SUA_DATABASE, SEU_USUARIO e SUA_SENHA pelas informações do seu banco de dados.
+```
 
 ### Executando as Migrações
 
