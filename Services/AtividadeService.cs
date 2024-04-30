@@ -12,15 +12,6 @@ public class AtividadeService : IAtividadeService
     {
         _dbContex = dbContex;
     }
-    public async Task<int> Create(AtividadeModel entity)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task<int> Delete(int id)
-    {
-        throw new NotImplementedException();
-    }
 
     public async Task<IEnumerable<AtividadeModel>> GetAll()
     {
@@ -30,15 +21,5 @@ public class AtividadeService : IAtividadeService
     public async Task<List<AtividadeModel>> GetAtividadeByIds(int[] ids)
     {
         return await _dbContex.Atividades.Where(p => ids.Contains(p.CodAtv)).ToListAsync();
-    }
-
-    public async Task<AtividadeModel> GetById(int id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task<int> Update(AtividadeModel entity)
-    {
-        throw new NotImplementedException();
     }
 }
