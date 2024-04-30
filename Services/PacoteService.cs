@@ -32,7 +32,12 @@ public class PacoteService : IPacoteService
         throw new NotImplementedException();
     }
 
-    public async Task<int> Update(PacoteModel entity)
+    public async Task<List<PacoteModel>> GetPacotesByIds(int[] ids)
+    {
+        return await _dbContex.Pacotes.Where(p => ids.Contains(p.CodPac)).ToListAsync();
+    }
+
+    public Task<int> Update(PacoteModel entity)
     {
         throw new NotImplementedException();
     }

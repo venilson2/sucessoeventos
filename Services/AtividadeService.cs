@@ -27,6 +27,11 @@ public class AtividadeService : IAtividadeService
         return await _dbContex.Atividades.ToListAsync();
     }
 
+    public async Task<List<AtividadeModel>> GetAtividadeByIds(int[] ids)
+    {
+        return await _dbContex.Atividades.Where(p => ids.Contains(p.CodAtv)).ToListAsync();
+    }
+
     public async Task<AtividadeModel> GetById(int id)
     {
         throw new NotImplementedException();
