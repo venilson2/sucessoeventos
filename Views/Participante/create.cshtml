@@ -41,14 +41,17 @@
 
     <div class="form-group">
         @Html.LabelFor(model => model.CodAtv, "Atividades:")
-        @foreach (var atividade in Model.Atividades)
+        @if(Model.Atividades != null)
         {
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="@("atividade_" + atividade.CodAtv)" name="IdsAtividadesSelecionadas" value="@atividade.CodAtv" @(atividade.Selected ? "checked" : "")>
-                <label class="form-check-label" for="@("atividade_" + atividade.CodAtv)">
-                    @atividade.DescAtv
-                </label>
-            </div>
+            @foreach (var atividade in Model.Atividades)
+            {
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="@("atividade_" + atividade.CodAtv)" name="CodAtv" value="@atividade.CodAtv" @(atividade.Selected ? "checked" : "")>
+                    <label class="form-check-label" for="@("atividade_" + atividade.CodAtv)">
+                        @atividade.DescAtv
+                    </label>
+                </div>
+            }
         }
     </div>
 
