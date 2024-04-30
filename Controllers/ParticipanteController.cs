@@ -54,19 +54,24 @@ public class ParticipanteController : Controller
     [HttpPost]
     public async Task<IActionResult> Create(ParticipanteViewModel model)
     {
+        IEnumerable<PacoteModel> pacotes = await _pacoteService.GetAll();
+        IEnumerable<AtividadeModel> atividades = await _atividadeService.GetAll();
+
         if (!ModelState.IsValid){ 
-            model.Pacotes = new List<PacoteViewModel>
-            {
-                new PacoteViewModel { CodPac = 10, Descricao = "Descrição 1", Preco = 10.0m },
-                new PacoteViewModel { CodPac = 99, Descricao = "Descrição 2", Preco = 20.0m }
-            };
-            model.Atividades = new List<AtividadeViewModel>
-            {
-                new AtividadeViewModel {CodAtv = 5, DescAtv = "Decrição 5", Preco = 10.0m, Vagas = 10},
-                new AtividadeViewModel {CodAtv = 7, DescAtv = "Decrição 7", Preco = 20.0m, Vagas = 20},
-                new AtividadeViewModel {CodAtv = 50, DescAtv = "Decrição 50", Preco = 99.0m, Vagas = 11},
-                new AtividadeViewModel {CodAtv = 58, DescAtv = "Decrição 58", Preco = 50.0m, Vagas = 6},
-            };
+            model.Pacotes = pacotes.Select(c => new PacoteViewModel {
+                CodPac = c.CodPac,
+                Descricao = c.Descricao,
+                Preco = c.Preco
+            }).ToList();
+            
+            model.Atividades = atividades.Select(a => new AtividadeViewModel {
+                CodAtv = a.CodAtv,
+                DescAtv = a.DescAtv,
+                Vagas = a.Vagas,        
+                Preco = a.Preco,
+                Selected = false
+            }).ToList();
+
             return View(model);
         }
         return RedirectToAction("Review", model);
@@ -76,9 +81,24 @@ public class ParticipanteController : Controller
     {
         if(model.CodPac != null){
             var pacotes = await _pacoteService.GetPacotesByIds(model.CodPac);
+
+            model.Pacotes = pacotes.Select(c => new PacoteViewModel {
+                CodPac = c.CodPac,
+                Descricao = c.Descricao,
+                Preco = c.Preco
+            }).ToList();
         }
+        
         if(model.CodAtv != null){
             var atividades = await _atividadeService.GetAtividadeByIds(model.CodAtv);
+
+            model.Atividades = atividades.Select(a => new AtividadeViewModel {
+                CodAtv = a.CodAtv,
+                DescAtv = a.DescAtv,
+                Vagas = a.Vagas,        
+                Preco = a.Preco,
+                Selected = false
+            }).ToList();
         }
         return View(model);
     }
