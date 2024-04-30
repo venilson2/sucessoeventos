@@ -6,20 +6,20 @@ namespace SucessoEventos.Services;
 
 public class AtividadeService : IAtividadeService
 {
-    private readonly AppDbContext _dbContex;
+    private readonly AppDbContext _dbContext;
 
     public AtividadeService(AppDbContext dbContex)
     {
-        _dbContex = dbContex;
+        _dbContext = dbContex;
     }
 
     public async Task<IEnumerable<AtividadeModel>> GetAll()
     {
-        return await _dbContex.Atividades.ToListAsync();
+        return await _dbContext.Atividades.ToListAsync();
     }
 
     public async Task<List<AtividadeModel>> GetAtividadeByIds(IEnumerable<int> ids)
     {
-        return await _dbContex.Atividades.Where(p => ids.Contains(p.CodAtv)).ToListAsync();
+        return await _dbContext.Atividades.Where(p => ids.Contains(p.CodAtv)).ToListAsync();
     }
 }
