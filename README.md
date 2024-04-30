@@ -35,6 +35,12 @@ Por fim, execute o projeto com o seguinte comando:
  dotnet watch run
 ```
 
+servidor local.
+
+```
+ http://localhost:5149
+```
+
 
 ## Rodadando com Docker 
 
@@ -48,11 +54,6 @@ Antes de executar o projeto, certifique-se de configurar a conexão com o banco 
 execute o comando:
 ```
 docker compose up --build
-```
-servidor local.
-
-```
- http://localhost:5149
 ```
 
 Isso iniciará o servidor e você poderá acessar o seu projeto localmente.
