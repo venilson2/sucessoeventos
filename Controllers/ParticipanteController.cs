@@ -57,7 +57,8 @@ public class ParticipanteController : Controller
         IEnumerable<PacoteModel> pacotes = await _pacoteService.GetAll();
         IEnumerable<AtividadeModel> atividades = await _atividadeService.GetAll();
 
-        if (!ModelState.IsValid){ 
+        if (!ModelState.IsValid)
+        { 
             model.Pacotes = pacotes.Select(c => new PacoteViewModel {
                 CodPac = c.CodPac,
                 Descricao = c.Descricao,
@@ -76,6 +77,7 @@ public class ParticipanteController : Controller
         }
         return RedirectToAction("Review", model);
     }
+
 
     public async Task<IActionResult> Review(ParticipanteViewModel model)
     {
