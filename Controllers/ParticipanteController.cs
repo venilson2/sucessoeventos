@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Globalization;
 using Microsoft.AspNetCore.Mvc;
 using SucessoEventos.Interfaces;
 using SucessoEventos.Models;
@@ -108,6 +109,14 @@ public class ParticipanteController : Controller
     [HttpPost]
     public async Task<IActionResult> Create(ParticipanteViewModel model)
     {
+        ParticipanteModel participante = new ParticipanteModel{
+            Nome = model.Nome,
+            Telefone = model.Telefone,
+            DataNascimento = DateTime.ParseExact(model.DataNascimento, "dd/MM/yyyy", CultureInfo.InvariantCulture),
+        };
+
+        int id = await _participanteService.Create(participante);
+        Console.WriteLine(id);
         return RedirectToAction("Form");
     }
 

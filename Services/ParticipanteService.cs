@@ -6,22 +6,22 @@ namespace SucessoEventos.Services;
 
 public class ParticipanteService : IParticipanteService
 {
-    private readonly AppDbContext _dbContextt;
+    private readonly AppDbContext _dbContext;
 
-    public ParticipanteService(AppDbContext dbContex)
+    public ParticipanteService(AppDbContext dbContext)
     {
-        _dbContextt = dbContex;
+        _dbContext = dbContext;
     }
     
     public async Task<IEnumerable<ParticipanteModel>> GetAll()
     {
-        return await _dbContextt.Participantes.ToListAsync();
+        return await _dbContext.Participantes.ToListAsync();
     }
     
     public async Task<int> Create(ParticipanteModel entity)
     {
-        var entry = await _dbContextt.Participantes.AddAsync(entity);
-        await _dbContextt.SaveChangesAsync();
+        var entry = await _dbContext.Participantes.AddAsync(entity);
+        await _dbContext.SaveChangesAsync();
         return entry.Entity.CodPar;
     }
 }
