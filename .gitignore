@@ -19,4 +19,4 @@ obj/
 *.swp
 
 # Arquivos de banco de dados
-db/
+sql_db/
