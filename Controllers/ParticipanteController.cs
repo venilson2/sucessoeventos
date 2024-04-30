@@ -105,6 +105,12 @@ public class ParticipanteController : Controller
         return View(model);
     }
 
+    [HttpPost]
+    public async Task<IActionResult> Create(ParticipanteViewModel model)
+    {
+        return RedirectToAction("Form");
+    }
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
