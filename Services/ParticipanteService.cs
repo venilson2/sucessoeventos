@@ -18,10 +18,21 @@ public class ParticipanteService : IParticipanteService
         return await _dbContext.Participantes.ToListAsync();
     }
     
-    public async Task<int> Create(ParticipanteModel entity)
+    public async Task<int> Create(ParticipanteModel entity, List<PacoteModel> pacotes)
     {
-        var entry = await _dbContext.Participantes.AddAsync(entity);
+        var participante = await _dbContext.Participantes.AddAsync(entity);
         await _dbContext.SaveChangesAsync();
-        return entry.Entity.CodPar;
+
+        foreach (var pacote in pacotes){
+
+            var pacoteparticipante = new PacoteParticipanteModel{
+                CodPac = pacote.CodPac,
+                CodPar = participante.Entity.CodPar
+            };
+            await _dbContext.PacoteParticipante.AddAsync(pacoteparticipante);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        return participante.Entity.CodPar;
     }
 }

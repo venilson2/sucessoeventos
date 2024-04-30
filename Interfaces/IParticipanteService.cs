@@ -5,5 +5,5 @@ namespace SucessoEventos.Interfaces;
     public interface IParticipanteService
     {
         Task<IEnumerable<ParticipanteModel>> GetAll();
-        Task<int> Create(ParticipanteModel entity);
+        Task<int> Create(ParticipanteModel entity, List<PacoteModel> pacotes);
     }

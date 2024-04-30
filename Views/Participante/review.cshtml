@@ -24,6 +24,10 @@
                             @foreach (var pacote in Model.Pacotes)
                             {
                                 <li class="list-group-item">@pacote.Descricao - R$ @pacote.Preco</li>
+
+                                <input type="hidden" name="Pacotes[@pacote.CodPac].CodPac" value="@pacote.CodPac" />
+                                <input type="hidden" name="Pacotes[@pacote.CodPac].Descricao" value="@pacote.Descricao" />
+                                <input type="hidden" name="Pacotes[@pacote.CodPac].Preco" value="@pacote.Preco" />
                             }
                         </ul>
                     }
@@ -50,14 +54,21 @@
             </div>
         </div>
     </div>
-    
+
     @using (Html.BeginForm("Create", "Participante", FormMethod.Post))
     {
         <input type="hidden" asp-for="Nome" />
         <input type="hidden" asp-for="DataNascimento" />
         <input type="hidden" asp-for="Telefone" />
-        <input type="hidden" asp-for="CodPacSelecionados" />
-        <input type="hidden" asp-for="CodAtv" />
+
+        <!-- Remova os campos ocultos para CodPacSelecionados, Pacotes, CodAtv e Atividades -->
+
+        @for (int i = 0; i < Model.Pacotes.Count; i++)
+        {
+            <input type="hidden" name="Pacotes[@i].CodPac" value="@Model.Pacotes[i].CodPac" />
+            <input type="hidden" name="Pacotes[@i].Descricao" value="@Model.Pacotes[i].Descricao" />
+            <input type="hidden" name="Pacotes[@i].Preco" value="@Model.Pacotes[i].Preco" />
+        }
 
         <div class="row mt-3 justify-content-end">
             <div class="col-auto">
@@ -66,4 +77,5 @@
             </div>
         </div>
     }
+
 </div>

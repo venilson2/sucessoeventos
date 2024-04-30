@@ -109,18 +109,37 @@ public class ParticipanteController : Controller
     [HttpPost]
     public async Task<IActionResult> Create(ParticipanteViewModel model)
     {
-        ParticipanteModel participante = new ParticipanteModel
-        {
-            Nome = model.Nome,
-            Telefone = model.Telefone,
-            DataNascimento = DateTime.ParseExact(model.DataNascimento, "dd/MM/yyyy", CultureInfo.InvariantCulture),
-        };
+        // try
+        // {
+            ParticipanteModel participante = new ParticipanteModel
+            {
+                Nome = model.Nome,
+                Telefone = model.Telefone,
+                DataNascimento = DateTime.ParseExact(model.DataNascimento, "dd/MM/yyyy", CultureInfo.InvariantCulture),
+            };
 
-        int id = await _participanteService.Create(participante);
-        
-        TempData["ToastMessage"] = "Dados salvos com sucesso!";
+            var pacotes = new List<PacoteModel>();
+            foreach (var pacote in model.Pacotes)
+            {
+                pacotes.Add(new PacoteModel
+                {
+                    CodPac = pacote.CodPac,
+                    Descricao = pacote.Descricao,
+                    Preco = pacote.Preco
+                });
+            }
 
-        return RedirectToAction("Form");
+            int id = await _participanteService.Create(participante, pacotes);
+            
+            TempData["ToastMessage"] = "Dados salvos com sucesso!";
+
+            return RedirectToAction("Form");
+        // }
+        // catch (Exception ex)
+        // {
+        //     TempData["ToastMessage"] = "Ocorreu um erro ao salvar os dados.";
+        //     return RedirectToAction("Error", "Home");
+        // }
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

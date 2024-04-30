@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace SucessoEventos.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240430193506_relationPacoteParticipante")]
+    partial class relationPacoteParticipante
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -20,6 +23,21 @@ namespace SucessoEventos.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("AtividadeModelParticipanteModel", b =>
+                {
+                    b.Property<int>("AtividadesCodAtv")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ParticipantesCodPar")
+                        .HasColumnType("int");
+
+                    b.HasKey("AtividadesCodAtv", "ParticipantesCodPar");
+
+                    b.HasIndex("ParticipantesCodPar");
+
+                    b.ToTable("AxParticipanteAtividade", (string)null);
+                });
 
             modelBuilder.Entity("SucessoEventos.Models.AtividadeModel", b =>
                 {
@@ -58,23 +76,6 @@ namespace SucessoEventos.Migrations
                             Preco = 20.0m,
                             Vagas = 20
                         });
-                });
-
-            modelBuilder.Entity("SucessoEventos.Models.AtividadeParticipanteModel", b =>
-                {
-                    b.Property<int>("CodAtv")
-                        .HasColumnType("int")
-                        .HasColumnName("CodAtv");
-
-                    b.Property<int>("CodPar")
-                        .HasColumnType("int")
-                        .HasColumnName("CodPar");
-
-                    b.HasKey("CodAtv", "CodPar");
-
-                    b.HasIndex("CodPar");
-
-                    b.ToTable("AxParticipanteAtividade", (string)null);
                 });
 
             modelBuilder.Entity("SucessoEventos.Models.PacoteModel", b =>
@@ -158,23 +159,19 @@ namespace SucessoEventos.Migrations
                     b.ToTable("Participantes", (string)null);
                 });
 
-            modelBuilder.Entity("SucessoEventos.Models.AtividadeParticipanteModel", b =>
+            modelBuilder.Entity("AtividadeModelParticipanteModel", b =>
                 {
-                    b.HasOne("SucessoEventos.Models.AtividadeModel", "Atividade")
+                    b.HasOne("SucessoEventos.Models.AtividadeModel", null)
                         .WithMany()
-                        .HasForeignKey("CodAtv")
+                        .HasForeignKey("AtividadesCodAtv")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SucessoEventos.Models.ParticipanteModel", "Participante")
+                    b.HasOne("SucessoEventos.Models.ParticipanteModel", null)
                         .WithMany()
-                        .HasForeignKey("CodPar")
+                        .HasForeignKey("ParticipantesCodPar")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Atividade");
-
-                    b.Navigation("Participante");
                 });
 
             modelBuilder.Entity("SucessoEventos.Models.PacoteParticipanteModel", b =>

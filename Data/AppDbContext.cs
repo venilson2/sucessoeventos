@@ -9,6 +9,9 @@ public class AppDbContext : DbContext
     public DbSet<PacoteModel> Pacotes { get; set; }
     public DbSet<AtividadeModel> Atividades { get; set; }
 
+    public DbSet<PacoteParticipanteModel> PacoteParticipante { get; set; } 
+    public DbSet<AtividadeParticipanteModel> AtividadeParticipante { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder){
         modelBuilder.Entity<ParticipanteModel>()
             .ToTable("Participantes")
@@ -25,12 +28,29 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<ParticipanteModel>()
             .HasMany(par => par.Atividades)
             .WithMany(atv => atv.Participantes)
-            .UsingEntity(x => x.ToTable("AxParticipanteAtividade"));
+            .UsingEntity<AtividadeParticipanteModel>(
+            j => j.HasOne(ap => ap.Atividade).WithMany().HasForeignKey(ap => ap.CodAtv),
+            j => j.HasOne(ap => ap.Participante).WithMany().HasForeignKey(ap => ap.CodPar),
+            j => 
+            {
+                j.ToTable("AxParticipanteAtividade");
+                j.Property(ap => ap.CodPar).HasColumnName("CodPar");
+                j.Property(ap => ap.CodAtv).HasColumnName("CodAtv");
+            });
 
         modelBuilder.Entity<ParticipanteModel>()
             .HasMany(par => par.Pacotes)
             .WithMany(pac => pac.Participantes)
-            .UsingEntity(x => x.ToTable("AxParticipantePacote"));
+            .UsingEntity<PacoteParticipanteModel>(
+            j => j.HasOne(pp => pp.Pacote).WithMany().HasForeignKey(pp => pp.CodPac),
+            j => j.HasOne(pp => pp.Participante).WithMany().HasForeignKey(pp => pp.CodPar),
+            j => 
+             {
+                j.ToTable("AxParticipantePacote");
+                j.Property(pp => pp.CodPar).HasColumnName("CodPar");
+                j.Property(pp => pp.CodPac).HasColumnName("CodPac");
+            }
+        );
 
         modelBuilder.Entity<PacoteModel>().HasData(
             new PacoteModel
