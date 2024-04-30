@@ -20,29 +20,44 @@ public class ParticipanteService : IParticipanteService
     
     public async Task<int> Create(ParticipanteModel entity, List<PacoteModel> pacotes, List<AtividadeModel> atividades)
     {
-        var participante = await _dbContext.Participantes.AddAsync(entity);
-        await _dbContext.SaveChangesAsync();
+        using (var transaction = await _dbContext.Database.BeginTransactionAsync())
+        {
+            try
+            {
+                var participante = await _dbContext.Participantes.AddAsync(entity);
+                await _dbContext.SaveChangesAsync();
 
-        foreach (var pacote in pacotes){
+                foreach (var pacote in pacotes)
+                {
+                    var pacoteParticipante = new PacoteParticipanteModel
+                    {
+                        CodPac = pacote.CodPac,
+                        CodPar = participante.Entity.CodPar
+                    };
+                    await _dbContext.PacoteParticipante.AddAsync(pacoteParticipante);
+                }
 
-            var pacoteparticipante = new PacoteParticipanteModel{
-                CodPac = pacote.CodPac,
-                CodPar = participante.Entity.CodPar
-            };
-            await _dbContext.PacoteParticipante.AddAsync(pacoteparticipante);
-            await _dbContext.SaveChangesAsync();
+                foreach (var atividade in atividades)
+                {
+                    var atividadeParticipante = new AtividadeParticipanteModel
+                    {
+                        CodAtv = atividade.CodAtv,
+                        CodPar = participante.Entity.CodPar
+                    };
+                    await _dbContext.AtividadeParticipante.AddAsync(atividadeParticipante);
+                }
+
+                await _dbContext.SaveChangesAsync();
+                transaction.Commit();
+
+                return participante.Entity.CodPar;
+            }
+            catch (Exception)
+            {
+                transaction.Rollback();
+                throw;
+            }
         }
-
-        foreach (var atividade in atividades){
-
-            var atividadeparticipante = new AtividadeParticipanteModel{
-                CodAtv = atividade.CodAtv,
-                CodPar = participante.Entity.CodPar
-            };
-            await _dbContext.AtividadeParticipante.AddAsync(atividadeparticipante);
-            await _dbContext.SaveChangesAsync();
-        }
-
-        return participante.Entity.CodPar;
     }
+
 }
