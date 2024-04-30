@@ -2,6 +2,8 @@ using SucessoEventos.Models;
 
 namespace SucessoEventos.Interfaces;
 
-    public interface IAtividadeService : IService<AtividadeModel>
+    public interface IAtividadeService
     {
+        Task<IEnumerable<AtividadeModel>> GetAll();
+        Task<List<AtividadeModel>> GetAtividadeByIds(int[] ids);
     }
