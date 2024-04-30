@@ -34,6 +34,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Participante}/{action=Create}/{id?}");
+    pattern: "{controller=Participante}/{action=Form}/{id?}");
 
 app.Run();

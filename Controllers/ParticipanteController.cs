@@ -23,7 +23,7 @@ public class ParticipanteController : Controller
         _pacoteService = pacoteService;
     }
 
-    public async Task<IActionResult> Create()
+    public async Task<IActionResult> Form()
     {
         IEnumerable<PacoteModel> pacotes = await _pacoteService.GetAll();
         IEnumerable<AtividadeModel> atividades = await _atividadeService.GetAll();
@@ -52,7 +52,7 @@ public class ParticipanteController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(ParticipanteViewModel model)
+    public async Task<IActionResult> Form(ParticipanteViewModel model)
     {
         IEnumerable<PacoteModel> pacotes = await _pacoteService.GetAll();
         IEnumerable<AtividadeModel> atividades = await _atividadeService.GetAll();
