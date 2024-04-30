@@ -18,7 +18,7 @@ public class PacoteService : IPacoteService
         return await _dbContex.Pacotes.ToListAsync();
     }
 
-    public async Task<List<PacoteModel>> GetPacotesByIds(int[] ids)
+    public async Task<List<PacoteModel>> GetPacotesByIds(IEnumerable<int> ids)
     {
         return await _dbContex.Pacotes.Where(p => ids.Contains(p.CodPac)).ToListAsync();
     }

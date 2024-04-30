@@ -72,8 +72,14 @@ public class ParticipanteController : Controller
         return RedirectToAction("Review", model);
     }
 
-    public IActionResult Review(ParticipanteViewModel model)
+    public async Task<IActionResult> Review(ParticipanteViewModel model)
     {
+        if(model.CodPac != null){
+            var pacotes = await _pacoteService.GetPacotesByIds(model.CodPac);
+        }
+        if(model.CodAtv != null){
+            var atividades = await _atividadeService.GetAtividadeByIds(model.CodAtv);
+        }
         return View(model);
     }
 
