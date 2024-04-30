@@ -1,25 +1,6 @@
 # Sucesso Eventos
 
-## Rodadndo com Docker 
-
-
-Antes de executar o projeto, certifique-se de configurar a conexão com o banco de dados no arquivo `appsettings.json`, conforme abaixo:
-
-```json
-"DefaultConnection": "server=sql_db;database=sucessoeventos;user=sa;password=Root@2024;TrustServerCertificate=True"
-```
-
-execute o comando:
-```
-docker compose up --build
-```
-servidor local.
-
-```
- http://localhost:5149
-```
-
-## Rodadndo 
+## Rodadando Local
 
 ### Configuração do Banco de Dados
 
@@ -52,6 +33,26 @@ Por fim, execute o projeto com o seguinte comando:
 
 ```
  dotnet watch run
+```
+
+
+## Rodadando com Docker 
+
+
+Antes de executar o projeto, certifique-se de configurar a conexão com o banco de dados no arquivo `appsettings.json`, conforme abaixo:
+
+```json
+"DefaultConnection": "server=sql_db;database=sucessoeventos;user=sa;password=Root@2024;TrustServerCertificate=True"
+```
+
+execute o comando:
+```
+docker compose up --build
+```
+servidor local.
+
+```
+ http://localhost:5149
 ```
 
 Isso iniciará o servidor e você poderá acessar o seu projeto localmente.
