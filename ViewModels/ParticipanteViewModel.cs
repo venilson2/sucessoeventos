@@ -17,9 +17,9 @@ public class ParticipanteViewModel
 
     [Display(Name = "Pacotes")]
     public IEnumerable<int>? CodPacSelecionados  { get; set; }
-    public List<PacoteViewModel>? Pacotes  { get; set; }
+    public List<PacoteViewModel>? Pacotes  { get; set; } = new List<PacoteViewModel>();
 
     [Display(Name = "Atividades")]
     public IEnumerable<int>? CodAtv { get; set; }
-    public List<AtividadeViewModel>? Atividades { get; set; }
+    public List<AtividadeViewModel>? Atividades { get; set; } = new List<AtividadeViewModel>();
 }

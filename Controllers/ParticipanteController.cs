@@ -109,8 +109,8 @@ public class ParticipanteController : Controller
     [HttpPost]
     public async Task<IActionResult> Create(ParticipanteViewModel model)
     {
-        // try
-        // {
+        try
+        {
             ParticipanteModel participante = new ParticipanteModel
             {
                 Nome = model.Nome,
@@ -129,22 +129,27 @@ public class ParticipanteController : Controller
                 });
             }
 
-            int id = await _participanteService.Create(participante, pacotes);
+            var atividades = new List<AtividadeModel>();
+            foreach (var atividade in model.Atividades)
+            {
+                atividades.Add(new AtividadeModel
+                {
+                    CodAtv = atividade.CodAtv,
+                    DescAtv = atividade.DescAtv,
+                    Vagas = atividade.Vagas,
+                    Preco = atividade.Preco
+                });
+            }
+
+            await _participanteService.Create(participante, pacotes, atividades);
             
-            TempData["ToastMessage"] = "Dados salvos com sucesso!";
+            TempData["ToastSuccess"] = "Dados salvos com sucesso!";
 
             return RedirectToAction("Form");
-        // }
-        // catch (Exception ex)
-        // {
-        //     TempData["ToastMessage"] = "Ocorreu um erro ao salvar os dados.";
-        //     return RedirectToAction("Error", "Home");
-        // }
-    }
-
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        catch (Exception ex)
+        {
+            return RedirectToAction("Error", "Home");
+        }
     }
 }
