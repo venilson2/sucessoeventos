@@ -1,27 +1,6 @@
 version: '3.8'
 
 services:
-  sql_db:
-    image: mcr.microsoft.com/mssql/server
-    container_name: sql_db
-    restart: always
-    tty: true
-    user: "root"
-    environment:
-      - ACCEPT_EULA=Y
-      - SA_PASSWORD=Root@2024
-    volumes:
-      - ./sql_db:/var/opt/mssql
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-    ports:
-      - 1433:1433
-    networks:
-      - sucessoeventos_network
-    command: >
-      /bin/bash -c "/opt/mssql/bin/sqlservr & 
-      /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 'Root@2024' -i /docker-entrypoint-initdb.d/init.sql && 
-      wait $!"
-
   mvc:
     build:
       context: .
@@ -32,22 +11,11 @@ services:
       - /app/obj
     working_dir: /app
     command: >
-      bash -c "dockerize -wait tcp://sql_db:1433 -timeout 60m && 
-      dotnet restore &&
+      bash -c "dotnet restore &&
       dotnet clean && 
       dotnet build && 
-      export PATH=\"$PATH:/root/.dotnet/tools\" && 
-      dotnet tool install --global dotnet-ef --version=7.0.0 &&
       dotnet ef database update &&
       dotnet watch run --urls 'http://0.0.0.0:5149' --no-restore"
     ports:
       - "5149:5149"
-    networks:
-      - sucessoeventos_network
-      - default
-    depends_on:
-      - sql_db
-
-networks:
-  sucessoeventos_network:
-    driver: bridge
+    network_mode: host
