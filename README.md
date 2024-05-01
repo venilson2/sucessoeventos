@@ -7,7 +7,7 @@ Antes de executar o projeto, certifique-se de configurar a conexão com o banco 
 ```json
 "DefaultConnection": "server=SEU_SERVIDOR;database=SUA_DATABASE;user=SEU_USUARIO;password=SUA_SENHA;TrustServerCertificate=True"
 ```
-## Rodadando Local
+## Executando Localmente
 
 - Executando as Migrações
 ```
