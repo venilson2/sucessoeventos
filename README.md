@@ -1,63 +1,43 @@
 # Sucesso Eventos
 
-## Rodadando Local
-
-### Configuração do Banco de Dados
+## Configuração do Banco de Dados
 
 Antes de executar o projeto, certifique-se de configurar a conexão com o banco de dados no arquivo `appsettings.json`, conforme abaixo:
 
 ```json
 "DefaultConnection": "server=SEU_SERVIDOR;database=SUA_DATABASE;user=SEU_USUARIO;password=SUA_SENHA;TrustServerCertificate=True"
 ```
+## Rodadando Local
 
-### Executando as Migrações
-
-Para aplicar as migrações ao banco de dados, execute o seguinte comando no terminal:
-
+- Executando as Migrações
 ```
  dotnet ef database update
 ```
 
-### Restaurando as Dependências
-
-Certifique-se de restaurar as dependências do projeto executando o comando:
-
+- Restaurando as Dependências
 ```
  dotnet restore
 ```
 
-
-### Rodando o projeto
-
-Por fim, execute o projeto com o seguinte comando:
-
+- Rodando o projeto
 ```
  dotnet watch run
 ```
-
-servidor local.
-
+- iniciará o servidor local.
 ```
  http://localhost:5149
 ```
 
+## Executando com Docker 
 
-## Rodadando com Docker 
+> Observação: Ao executar com o docker ele executará as migrations automaticamente, apenas se atente a configuração do arquivo  ```appsettings.json``` 
 
-
-Antes de executar o projeto, certifique-se de configurar a conexão com o banco de dados no arquivo `appsettings.json`, conforme abaixo:
-
-```json
-"DefaultConnection": "server=sql_db;database=sucessoeventos;user=sa;password=Root@2024;TrustServerCertificate=True"
-```
-
-execute o comando:
+- execute o comando:
 ```
 docker compose up --build
 ```
 
-Isso iniciará o servidor e você poderá acessar o seu projeto localmente.
-
+- iniciará o servidor local.
 ```
  http://localhost:5149
 ```
